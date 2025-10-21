@@ -36,7 +36,7 @@ public class FileConverter extends JFrame {
         // -- ZENTRUM: Konvertierungsoptionen --
         JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel formatLabel = new JLabel("Konvertieren nach:");
-        String[] formats = {"PDF", "DOCX", "TXT", "PNG", "JPG"};
+        String[] formats = {"DOCX->PDF", "PDF->DOCX", "PDF->TXT", "PDF->PNG", "PDF->JPG","PNG->JPG","JPG->PNG"};
         formatComboBox = new JComboBox<>(formats);
         centerPanel.add(formatLabel);
         centerPanel.add(formatComboBox);
@@ -80,7 +80,7 @@ public class FileConverter extends JFrame {
                 JFileChooser saveFileChooser = new JFileChooser();
                 saveFileChooser.setDialogTitle("Speicherort auswählen");
                 // Dateinamen vorschlagen
-                saveFileChooser.setSelectedFile(new File(removeFileExtension(selectedFile.getName()) + "." + selectedFormat.toLowerCase()));
+                saveFileChooser.setSelectedFile(new File(removeFileExtension(selectedFile.getName()) + "." + removePfeil(selectedFormat.toLowerCase())));
 
                 int userSelection = saveFileChooser.showSaveDialog(FileConverter.this);
 
@@ -92,9 +92,12 @@ public class FileConverter extends JFrame {
                     // Beispiel:
                     // convertFile(selectedFile, fileToSave, selectedFormat);
                     // ----------------------------------------------------
-                    if(selectedFormat.equals("PDF")) {
+                    if(selectedFormat.equals("DOCX->PDF")) {
                     	 WordToPdf.wordToPdf(selectedFile.getAbsolutePath(), fileToSave.getAbsolutePath());
                     }
+                    if(selectedFormat.equals("PDF->DOCX")) {
+                    	PdfToWord.pdfToWord(selectedFile.getAbsolutePath(), fileToSave.getAbsolutePath());
+                   }
                     
 
                     // Erfolgsmeldung anzeigen
@@ -114,6 +117,14 @@ public class FileConverter extends JFrame {
         int lastDot = filename.lastIndexOf('.');
         if (lastDot > 0) {
             return filename.substring(0, lastDot);
+        }
+        return filename;
+    }
+    
+    private String removePfeil(String filename) {
+        int lastDot = filename.lastIndexOf('>');
+        if (lastDot > 0) {
+            return filename.substring(lastDot+1, filename.length());
         }
         return filename;
     }
