@@ -89,8 +89,7 @@ public class FileConverter extends JFrame {
                     
                     //WordToPdf.wordToPdf(selectedFormat, selectedFormat);
                     // --- HIER IHRE KONVERTIERUNGSLOGIK EINFÜGEN ---
-                    // Beispiel:
-                    // convertFile(selectedFile, fileToSave, selectedFormat);
+                    //
                     // ----------------------------------------------------
                     if(selectedFormat.equals("DOCX->PDF")) {
                     	 WordToPdf.wordToPdf(selectedFile.getAbsolutePath(), fileToSave.getAbsolutePath());
@@ -98,6 +97,9 @@ public class FileConverter extends JFrame {
                     if(selectedFormat.equals("PDF->DOCX")) {
                     	PdfToWord.pdfToWord(selectedFile.getAbsolutePath(), fileToSave.getAbsolutePath());
                    }
+                    if(selectedFormat.equals("PDF->PNG")) {
+                    	PdfToImage.pdfToPNG(selectedFile.getAbsolutePath(), fileToSave.getAbsolutePath());
+                    }
                     
 
                     // Erfolgsmeldung anzeigen
