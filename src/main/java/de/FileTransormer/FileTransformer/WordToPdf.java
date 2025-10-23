@@ -20,7 +20,6 @@ public class WordToPdf {
     		PdfConverter.getInstance().convert(doc, out, pdfOptions);
     		doc.close();
     		out.close();
-    		System.out.println("Done");
     	}
     	catch(Exception e) {
     		e.printStackTrace();
