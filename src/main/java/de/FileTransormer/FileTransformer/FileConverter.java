@@ -1,7 +1,12 @@
 package de.FileTransormer.FileTransformer;
 
+
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import com.formdev.flatlaf.FlatDarkLaf;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -137,6 +142,8 @@ public class FileConverter extends JFrame {
     }
 
     public static void start() {
+    	
+    	FlatDarkLaf.setup();
         // Swing-Anwendung im Event-Dispatch-Thread starten
         SwingUtilities.invokeLater(new Runnable() {
             @Override
