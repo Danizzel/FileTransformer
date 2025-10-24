@@ -13,7 +13,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class ImageToPDF {
 
-	public static void imageToPdf(String filelocation, String fileOutputLocation) {
+	public static boolean imageToPdf(String filelocation, String fileOutputLocation) {
 		Document doc = new Document();
 		
 		FileOutputStream out;
@@ -35,18 +35,24 @@ public class ImageToPDF {
 			writer.close();
 			out.close();
 			
+			return true;
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		} catch (DocumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
 	}
 }

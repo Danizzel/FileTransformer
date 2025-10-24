@@ -34,13 +34,37 @@ public class FileConverter extends JFrame {
         JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
         mainPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
         add(mainPanel);
+        
+        //Menu Bereich
+        
+        JPanel menuPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+        JMenuBar menuBar = new JMenuBar();
+        JMenu themeMenue = new JMenu("Theme");
+        menuBar.add(themeMenue);
+        
+        JMenuItem darkMode = new JMenuItem("Dark Theme");
+        JMenuItem lightMode = new JMenuItem("Light Mode");
+        JMenuItem midnightMode = new JMenuItem("Midnight Theme");
+        
+        themeMenue.add(darkMode);
+        themeMenue.add(midnightMode);
+        themeMenue.add(lightMode);
+        
+        menuPanel.add(menuBar);
+        
+        setJMenuBar(menuBar);
 
         // -- NORD-Bereich: Dateiauswahl --
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        
+        
         JButton selectFileButton = new JButton("Datei auswählen...");
         selectedFileLabel = new JLabel("Keine Datei ausgewählt.");
+        
         topPanel.add(selectFileButton);
         topPanel.add(selectedFileLabel);
+        
         mainPanel.add(topPanel, BorderLayout.NORTH);
 
         // -- ZENTRUM: Konvertierungsoptionen --
@@ -72,6 +96,21 @@ public class FileConverter extends JFrame {
                 }
             }
         });
+        
+        
+        darkMode.addActionListener(e -> {
+        	FlatDarkLaf.setup();
+        	FlatLaf.updateUI();
+        });
+        
+        lightMode.addActionListener(e -> {
+        	FlatIntelliJLaf.setup();
+        	FlatLaf.updateUI();
+        });
+        midnightMode.addActionListener(e -> {
+        	FlatMacDarkLaf.setup();
+        	FlatLaf.updateUI();
+        });
 
         // Aktion für den "Konvertieren"-Button
         convertButton.addActionListener(new ActionListener() {
@@ -96,32 +135,38 @@ public class FileConverter extends JFrame {
 
                 if (userSelection == JFileChooser.APPROVE_OPTION) {
                     File fileToSave = saveFileChooser.getSelectedFile();
+                    
+                    boolean checkIfFileConversion = false;
                   
                     
                     if(selectedFormat.equals("DOCX->PDF")) {
-                    	 WordToPdf.wordToPdf(selectedFile.getAbsolutePath(), fileToSave.getAbsolutePath());
+                    	checkIfFileConversion = WordToPdf.wordToPdf(selectedFile.getAbsolutePath(), fileToSave.getAbsolutePath());
                     }
                     if(selectedFormat.equals("PDF->PNG")) {
-                    	PdfToImage.pdfToPNG(selectedFile.getAbsolutePath(), fileToSave.getAbsolutePath());
+                    	checkIfFileConversion = PdfToImage.pdfToPNG(selectedFile.getAbsolutePath(), fileToSave.getAbsolutePath());
                     }
                     if(selectedFormat.equals("PDF->JPG")) {
-                    	PdfToImage.pdfToJPG(selectedFile.getAbsolutePath(), fileToSave.getAbsolutePath());
+                    	checkIfFileConversion = PdfToImage.pdfToJPG(selectedFile.getAbsolutePath(), fileToSave.getAbsolutePath());
                     }
                     if(selectedFormat.equals("Image->PDF")) {
-                    	ImageToPDF.imageToPdf(selectedFile.getAbsolutePath(), fileToSave.getAbsolutePath());
+                    	checkIfFileConversion = ImageToPDF.imageToPdf(selectedFile.getAbsolutePath(), fileToSave.getAbsolutePath());
                     }
                     //TODO:PDF to DOCX umwandlung funktioniert noch nicht -> UnsupportedFileFormatException
                     if(selectedFormat.equals("PDF->DOCX")) {
-                    	PDFToWord.pdfToWord(selectedFile.getAbsolutePath(), fileToSave.getAbsolutePath());
+                    	checkIfFileConversion = PDFToWord.pdfToWord(selectedFile.getAbsolutePath(), fileToSave.getAbsolutePath());
                     }
                     
-                    
-
-                    // Erfolgsmeldung anzeigen
-                    JOptionPane.showMessageDialog(FileConverter.this,
-                            "Datei erfolgreich nach " + fileToSave.getAbsolutePath() + " konvertiert!",
-                            "Konvertierung erfolgreich",
-                            JOptionPane.INFORMATION_MESSAGE);
+                    if(checkIfFileConversion) {
+                    	// Erfolgsmeldung anzeigen
+                        JOptionPane.showMessageDialog(FileConverter.this,
+                                "Datei erfolgreich nach " + fileToSave.getAbsolutePath() + " konvertiert!",
+                                "Konvertierung erfolgreich",
+                                JOptionPane.INFORMATION_MESSAGE);
+                    }else {
+                    	JOptionPane.showMessageDialog(FileConverter.this,
+                    			"Da ist was schief gegangen. Prüfe ob das Dateiformat der Datei entspricht",
+                    			"Konvertierung nicht erfolgreich",JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
             }
         });
@@ -151,14 +196,12 @@ public class FileConverter extends JFrame {
     	/*
     	 * TODO:FlatLaf nutzen und das Design anpassen sowie dem Nutzer die Möglichkeit geben dieses zu ändern
     	 */
-    	//FlatMacDarkLaf.setup();
-    	//FlatDarkLaf.setup();
-    	//FlatIntelliJLaf.setup();
     	
         // Swing-Anwendung im Event-Dispatch-Thread starten
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
+            	FlatDarkLaf.setup();
                 new FileConverter().setVisible(true);
             }
         });

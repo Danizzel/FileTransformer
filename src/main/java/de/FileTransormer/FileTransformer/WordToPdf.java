@@ -10,7 +10,7 @@ import fr.opensagres.poi.xwpf.converter.pdf.PdfOptions;
 
 public class WordToPdf {
 	
-	public static void wordToPdf(String fileLocation, String fileOutputLocation) {
+	public static boolean wordToPdf(String fileLocation, String fileOutputLocation) {
 		
 		try {
     		FileInputStream docFile = new FileInputStream(fileLocation);
@@ -20,9 +20,11 @@ public class WordToPdf {
     		PdfConverter.getInstance().convert(doc, out, pdfOptions);
     		doc.close();
     		out.close();
+    		return true;
     	}
     	catch(Exception e) {
     		e.printStackTrace();
+    		return false;
     	}
         
 	}
