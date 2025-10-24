@@ -1,21 +1,17 @@
 package de.FileTransormer.FileTransformer;
 
-import com.aspose.words.Document;
-import com.aspose.words.SaveFormat;
+import com.aspose.pdf.Document;
+import com.aspose.pdf.SaveFormat;
 
 public class PDFToWord {
 
 	
 	public static void pdfToWord(String fileLocation, String fileOutputLocation) {
 		
-		try {
-			Document pdfDocument = new Document(fileLocation);
-			
-			pdfDocument.save(fileOutputLocation, SaveFormat.DOCX);
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		// Open the source PDF document
+	    Document document = new Document(fileLocation);
+	    // Save the file into MS document format
+	    document.save(fileOutputLocation, SaveFormat.Doc);
+	    document.close();
 	}
 }
