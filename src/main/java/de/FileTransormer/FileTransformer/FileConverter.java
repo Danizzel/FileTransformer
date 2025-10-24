@@ -5,7 +5,12 @@ package de.FileTransormer.FileTransformer;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -143,7 +148,13 @@ public class FileConverter extends JFrame {
 
     public static void start() {
     	
-    	FlatDarkLaf.setup();
+    	/*
+    	 * TODO:FlatLaf nutzen und das Design anpassen sowie dem Nutzer die Möglichkeit geben dieses zu ändern
+    	 */
+    	//FlatMacDarkLaf.setup();
+    	//FlatDarkLaf.setup();
+    	//FlatIntelliJLaf.setup();
+    	
         // Swing-Anwendung im Event-Dispatch-Thread starten
         SwingUtilities.invokeLater(new Runnable() {
             @Override
