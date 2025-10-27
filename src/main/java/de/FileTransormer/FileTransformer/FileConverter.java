@@ -25,6 +25,9 @@ public class FileConverter extends JFrame {
 
     public FileConverter() {
         // Fenstereinstellungen
+    	
+    	PrefsManager.loadAndApplySettings();
+    	
         setTitle("Datei-Konverter");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500, 250);
@@ -101,15 +104,18 @@ public class FileConverter extends JFrame {
         darkMode.addActionListener(e -> {
         	FlatDarkLaf.setup();
         	FlatLaf.updateUI();
+        	PrefsManager.saveSettings("darklaf");
         });
         
         lightMode.addActionListener(e -> {
         	FlatIntelliJLaf.setup();
         	FlatLaf.updateUI();
+        	PrefsManager.saveSettings("lightlaf");
         });
         midnightMode.addActionListener(e -> {
         	FlatMacDarkLaf.setup();
         	FlatLaf.updateUI();
+        	PrefsManager.saveSettings("midnightlaf");
         });
 
         // Aktion für den "Konvertieren"-Button
@@ -201,7 +207,6 @@ public class FileConverter extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-            	FlatDarkLaf.setup();
                 new FileConverter().setVisible(true);
             }
         });
