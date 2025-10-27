@@ -73,7 +73,7 @@ public class FileConverter extends JFrame {
         // -- ZENTRUM: Konvertierungsoptionen --
         JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel formatLabel = new JLabel("Konvertieren nach:");
-        String[] formats = {"DOCX->PDF","PDF->DOCX", "PDF->PNG", "PDF->JPG","Image->PDF"};
+        String[] formats = {"DOCX->PDF","PDF->PNG", "PDF->JPG","Image->PDF"};
         formatComboBox = new JComboBox<>(formats);
         centerPanel.add(formatLabel);
         centerPanel.add(formatComboBox);
@@ -157,10 +157,7 @@ public class FileConverter extends JFrame {
                     if(selectedFormat.equals("Image->PDF")) {
                     	checkIfFileConversion = ImageToPDF.imageToPdf(selectedFile.getAbsolutePath(), fileToSave.getAbsolutePath());
                     }
-                    //TODO:PDF to DOCX umwandlung funktioniert noch nicht -> UnsupportedFileFormatException
-                    if(selectedFormat.equals("PDF->DOCX")) {
-                    	checkIfFileConversion = PDFToWord.pdfToWord(selectedFile.getAbsolutePath(), fileToSave.getAbsolutePath());
-                    }
+                   
                     
                     if(checkIfFileConversion) {
                     	// Erfolgsmeldung anzeigen
