@@ -13,9 +13,13 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <flatlafVersion>3.4</flatlafVersion>
+    <!-- 
+      KORREKTUR 1: Dies ist der moderne Weg, um Maven mitzuteilen, 
+      dass es für Java 8 kompilieren soll. 
+      Dies behebt die "Bootstrap Classpath"-Warnungen.
+    -->
+    <maven.compiler.release>8</maven.compiler.release>
   </properties>
-  
-  
   
 	<repositories>
    	 <repository>
@@ -27,28 +31,54 @@
 
 	<build>
     <plugins>
+        <!-- Dieser Plugin-Eintrag stellt sicher, dass die Java-Version korrekt verwendet wird -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.13.0</version>
+            <!-- Die Konfiguration wird von der <maven.compiler.release> Eigenschaft übernommen -->
+        </plugin>
+
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-shade-plugin</artifactId>
-            <version>3.5.2</version> <executions>
+            <version>3.5.2</version>
+            <executions>
                 <execution>
                     <phase>package</phase>
                     <goals>
                         <goal>shade</goal>
                     </goals>
-                    	<configuration>
-                        	<transformers>
-                           	 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-    							<mainClass>de.FileTransormer.FileTransformer.App</mainClass>
-							</transformer>
+                    <configuration>
+                        <transformers>
+                            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                <mainClass>de.FileTransormer.FileTransformer.App</mainClass>
+                            </transformer>
                         </transformers>
-                    	</configuration>
-                	</execution>
-            	</executions>
-        	</plugin>
+                        
+                        <!-- 
+                          Dieser Filter ist immer noch nützlich, um Probleme mit 
+                          signierten JARs zu verhindern und schadet nicht.
+                        -->
+                        <filters>
+                            <filter>
+                                <artifact>*:*</artifact>
+                                <excludes>
+                                    <exclude>META-INF/*.SF</exclude>
+                                    <exclude>META-INF/*.DSA</exclude>
+                                    <exclude>META-INF/*.RSA</exclude>
+                                    <exclude>*.so</exclude>
+                                    <exclude>*.dll</exclude>
+                                    <exclude>*.dylib</exclude>
+                                </excludes>
+                            </filter>
+                        </filters>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
     </plugins>
 	</build>
-
 
   <dependencies>
 	
@@ -58,7 +88,6 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
-    
     
    		<dependency>
 			<groupId>org.apache.poi</groupId>
@@ -90,62 +119,27 @@
     		<artifactId>pdf2dom</artifactId>
     		<version>2.0.1</version>
 		</dependency>
-		
-		
 		<dependency>
         	<groupId>com.aspose</groupId>
         	<artifactId>aspose-pdf</artifactId>
         	<version>24.7</version> 
         </dependency>
         
-        
-        
-        
-        
-        
-        
+        <!-- 
+          KORREKTUR 2: Dies ist die *einzige* FlatLaf-Abhängigkeit, die du brauchst.
+          Die nativen Dateien sind hier bereits enthalten.
+        -->
         <dependency>
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf</artifactId>
             <version>${flatlafVersion}</version>
         </dependency>
-
-        <dependency>
-            <groupId>com.formdev</groupId>
-            <artifactId>flatlaf</artifactId>
-            <version>${flatlafVersion}</version>
-            <classifier>linux-x86_64</classifier>
-            <type>so</type>
-        </dependency>
-        <dependency>
-            <groupId>com.formdev</groupId>
-            <artifactId>flatlaf</artifactId>
-            <version>${flatlafVersion}</version>
-            <classifier>macos-arm64</classifier>
-            <type>dylib</type>
-        </dependency>
-        <dependency>
-            <groupId>com.formdev</groupId>
-            <artifactId>flatlaf</artifactId>
-            <version>${flatlafVersion}</version>
-            <classifier>macos-x86_64</classifier>
-            <type>dylib</type>
-        </dependency>
-        <dependency>
-            <groupId>com.formdev</groupId>
-            <artifactId>flatlaf</artifactId>
-            <version>${flatlafVersion}</version>
-            <classifier>windows-x86_64</classifier>
-            <type>dll</type>
-        </dependency>
-        <dependency>
-            <groupId>com.formdev</groupId>
-            <artifactId>flatlaf</artifactId>
-            <version>${flatlafVersion}</version>
-            <classifier>windows-arm64</classifier>
-            <type>dll</type>
-        </dependency>
-		
+        
+        <!-- 
+          ALLE ANDEREN FLATLAF-ABHÄNGIGKEITEN MIT <classifier> UND <type>
+          WURDEN ENTFERNT, DA SIE DEN FEHLER VERURSACHT HABEN.
+        -->
     
   </dependencies>
 </project>
+
