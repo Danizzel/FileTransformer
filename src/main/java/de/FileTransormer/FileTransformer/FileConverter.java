@@ -157,6 +157,9 @@ public class FileConverter extends JFrame {
                     if(selectedFormat.equals("Image->PDF")) {
                     	checkIfFileConversion = ImageToPDF.imageToPdf(selectedFile.getAbsolutePath(), fileToSave.getAbsolutePath());
                     }
+                    if(selectedFormat.equals("PPTX->PDF")){
+                    	checkIfFileConversion = PPTXToPDF.pptxToPDF(selectedFile.getAbsolutePath(), fileToSave.getAbsolutePath());
+                    }
                    
                     
                     if(checkIfFileConversion) {
