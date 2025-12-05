@@ -11,6 +11,8 @@ import com.spire.presentation.Presentation;
 
 public class PPTXToPDF {
 	
+	
+	//TODO: Erster Test der Umwandlung der Powerpoint Datei in PDF war erfolgreich allerdings sehr langsam = weiter überprüfen
 	public static boolean pptxToPDF(String fileLocation, String fileOutputLocation) {
 		
 		Presentation presentation = new Presentation();
@@ -29,6 +31,7 @@ public class PPTXToPDF {
 	}
 	
 	public static boolean pdfToPPTX(String fileLocation, String fileOutputLocation) {
+		return false;
 		
 		/*
 		 * TODO:PDF Datei in Bilder konvertieren und in einen Ordner speichern

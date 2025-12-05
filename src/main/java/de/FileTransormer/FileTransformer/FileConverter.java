@@ -73,7 +73,7 @@ public class FileConverter extends JFrame {
         // -- ZENTRUM: Konvertierungsoptionen --
         JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel formatLabel = new JLabel("Konvertieren nach:");
-        String[] formats = {"DOCX->PDF","PDF->PNG", "PDF->JPG","Image->PDF"};
+        String[] formats = {"DOCX->PDF","PDF->PNG", "PDF->JPG","Image->PDF","PPTX->PDF"};
         formatComboBox = new JComboBox<>(formats);
         centerPanel.add(formatLabel);
         centerPanel.add(formatComboBox);
