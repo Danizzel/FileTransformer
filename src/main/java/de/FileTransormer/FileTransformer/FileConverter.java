@@ -208,12 +208,7 @@ public class FileConverter extends JFrame {
         return filename;
     }
 
-    public static void start() {
-    	
-    	/*
-    	 * TODO:FlatLaf nutzen und das Design anpassen sowie dem Nutzer die Möglichkeit geben dieses zu ändern
-    	 */
-    	
+    public void start() {
         // Swing-Anwendung im Event-Dispatch-Thread starten
         SwingUtilities.invokeLater(new Runnable() {
             @Override

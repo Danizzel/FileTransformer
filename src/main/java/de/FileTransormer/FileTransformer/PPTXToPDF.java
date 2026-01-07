@@ -1,15 +1,7 @@
 package de.FileTransormer.FileTransformer;
 
-import java.io.File;
-import java.io.IOException;
-
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.rendering.PDFRenderer;
-
 import com.aspose.pdf.Document;
 import com.aspose.pdf.PptxSaveOptions;
-import com.itextpdf.text.log.SysoCounter;
-import com.spire.pdf.PdfDocument;
 import com.spire.presentation.FileFormat;
 import com.spire.presentation.Presentation;
 
@@ -37,8 +29,7 @@ public class PPTXToPDF {
 	
 	public static boolean pdfToPPTX(String fileLocation, String fileOutputLocation) {
 
-		try {
-			Document doc = new Document(fileLocation);
+		try (Document doc = new Document(fileLocation)) {
 			doc.setBackground(java.awt.Color.WHITE);
 			doc.setFitWindow(true);
 			PptxSaveOptions pptx_save = new PptxSaveOptions();

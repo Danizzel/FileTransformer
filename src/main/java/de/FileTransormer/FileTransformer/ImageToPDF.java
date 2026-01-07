@@ -1,11 +1,9 @@
 package de.FileTransormer.FileTransformer;
 
-import java.awt.Image;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
