@@ -17,7 +17,7 @@ public class PdfToImage {
 			PDDocument doc = PDDocument.load(new File(fileLocation));
 			PDFRenderer pdfRenderer = new PDFRenderer(doc);
 
-			File outputDir = new File(cutPNGTitel(fileOutputLocation));
+			File outputDir = new File(ToolClass.cutPNGTitel(fileOutputLocation));
 			if (!outputDir.exists()) {
 				outputDir.mkdirs(); // mkdirs() erstellt auch übergeordnete Verzeichnisse, falls nötig
 			}
@@ -26,7 +26,7 @@ public class PdfToImage {
 				BufferedImage bim = pdfRenderer.renderImageWithDPI(page, 300, ImageType.RGB);
 
 				String fileName = String.format("seite_%d.png", page + 1);
-				String outputPath = cutPNGTitel(fileOutputLocation) + File.separator + fileName;
+				String outputPath = ToolClass.cutPNGTitel(fileOutputLocation) + File.separator + fileName;
 
 				ImageIOUtil.writeImage(bim, outputPath, 300);
 			}
@@ -48,7 +48,7 @@ public class PdfToImage {
 			PDDocument doc = PDDocument.load(new File(fileLocation));
 			PDFRenderer pdfRenderer = new PDFRenderer(doc);
 
-			File outputDir = new File(cutPNGTitel(fileOutputLocation));
+			File outputDir = new File(ToolClass.cutPNGTitel(fileOutputLocation));
 			if (!outputDir.exists()) {
 				outputDir.mkdirs(); // mkdirs() erstellt auch übergeordnete Verzeichnisse, falls nötig
 			}
@@ -57,7 +57,7 @@ public class PdfToImage {
 				BufferedImage bim = pdfRenderer.renderImageWithDPI(page, 300, ImageType.RGB);
 
 				String fileName = String.format("seite_%d.jpg", page + 1);
-				String outputPath = cutPNGTitel(fileOutputLocation) + File.separator + fileName;
+				String outputPath = ToolClass.cutPNGTitel(fileOutputLocation) + File.separator + fileName;
 
 				ImageIOUtil.writeImage(bim, outputPath, 300);
 			}
@@ -72,12 +72,5 @@ public class PdfToImage {
 
 	}
 
-	public static String cutPNGTitel(String fileLocationName) {
-
-		int lastDot = fileLocationName.lastIndexOf('.');
-		if (lastDot > 0) {
-			return fileLocationName.substring(0, lastDot);
-		}
-		return fileLocationName;
-	}
+	
 }
