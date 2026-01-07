@@ -6,8 +6,13 @@ import java.io.IOException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
 
+import com.aspose.pdf.Document;
+import com.aspose.pdf.PptxSaveOptions;
+import com.itextpdf.text.log.SysoCounter;
+import com.spire.pdf.PdfDocument;
 import com.spire.presentation.FileFormat;
 import com.spire.presentation.Presentation;
+
 
 public class PPTXToPDF {
 	
@@ -31,16 +36,23 @@ public class PPTXToPDF {
 	}
 	
 	public static boolean pdfToPPTX(String fileLocation, String fileOutputLocation) {
-		return false;
+
+		try {
+			Document doc = new Document(fileLocation);
+			doc.setBackground(java.awt.Color.WHITE);
+			doc.setFitWindow(true);
+			PptxSaveOptions pptx_save = new PptxSaveOptions();
+			pptx_save.setSlidesAsImages(true);
+			pptx_save.setImageResolution(200);
+			doc.save(fileOutputLocation, pptx_save);
+		}catch(Exception e){
+			System.err.println("Fehler aufgetreten in PDF zu PPTX umwandlung");
+			return false;
+		}
 		
-		/*
-		 * TODO:PDF Datei in Bilder konvertieren und in einen Ordner speichern
-		 * 		Diese Bilder dann per Apache POI als Bilder in die Powerpoints slides einfügen
-		 * 			-> zwei Methode nötig 
-		 * 				-> create Image (wiederverwendung von pdfToImage Methode
-		 * 				-> Methode um diese Bilder zu einer Powerpoint Datei einzufügen
-		 * 					->den Ordner mit den Bildern am Ende löschen
-		 */
+		return true;
+		
+		
 	}
 
 }
