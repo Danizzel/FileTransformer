@@ -75,7 +75,7 @@ public class FileConverter extends JFrame {
         // -- ZENTRUM: Konvertierungsoptionen --
         JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel formatLabel = new JLabel("Konvertieren nach:");
-        String[] formats = {"DOCX->PDF","PDF->PNG", "PDF->JPG","Image->PDF","PPTX->PDF","PDF->PPTX","Image->TIFF", "TIFF->PNG"};
+        String[] formats = {"DOCX->PDF","PDF->DOCX","PDF->PNG", "PDF->JPG","Image->PDF","PPTX->PDF","PDF->PPTX","Image->TIFF", "TIFF->PNG"};
         formatComboBox = new JComboBox<>(formats);
         centerPanel.add(formatLabel);
         centerPanel.add(formatComboBox);
@@ -149,6 +149,9 @@ public class FileConverter extends JFrame {
                     
                     if(selectedFormat.equals("DOCX->PDF")) {
                     	checkIfFileConversion = WordToPdf.wordToPdf(selectedFile.getAbsolutePath(), fileToSave.getAbsolutePath());
+                    }
+                    if(selectedFormat.equals("PDF->DOCX")) {
+                    	checkIfFileConversion = WordToPdf.pdfToWord(selectedFile.getAbsolutePath(), fileToSave.getAbsolutePath());
                     }
                     if(selectedFormat.equals("PDF->PNG")) {
                     	checkIfFileConversion = PdfToImage.pdfToPNG(selectedFile.getAbsolutePath(), fileToSave.getAbsolutePath());
