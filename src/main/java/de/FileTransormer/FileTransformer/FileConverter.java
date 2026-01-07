@@ -5,12 +5,10 @@ package de.FileTransormer.FileTransformer;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
-import com.formdev.flatlaf.themes.FlatMacLightLaf;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,7 +17,11 @@ import java.io.File;
 
 public class FileConverter extends JFrame {
 
-    private File selectedFile;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7652734068881376422L;
+	private File selectedFile;
     private JLabel selectedFileLabel;
     private JComboBox<String> formatComboBox;
 
