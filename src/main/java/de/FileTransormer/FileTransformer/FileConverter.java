@@ -17,25 +17,23 @@ import java.io.File;
 
 public class FileConverter extends JFrame {
 
-    /**
-	 * 
-	 */
+    
 	private static final long serialVersionUID = 7652734068881376422L;
 	private File selectedFile;
     private JLabel selectedFileLabel;
     private JComboBox<String> formatComboBox;
 
     public FileConverter() {
-        // Fenstereinstellungen
-    	
+        
+    	//Fenster-Einstellung
     	PrefsManager.loadAndApplySettings();
     	
         setTitle("Datei-Konverter");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500, 250);
-        setLocationRelativeTo(null); // Fenster zentrieren
+        setLocationRelativeTo(null); // -> Fenster zentrieren
 
-        // Haupt-Panel erstellen
+        // Haupt-Panel
         JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
         mainPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
         add(mainPanel);
@@ -60,7 +58,7 @@ public class FileConverter extends JFrame {
         
         setJMenuBar(menuBar);
 
-        // -- NORD-Bereich: Dateiauswahl --
+        //Nord-Bereich: zur Dateiauswahl
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         
         
@@ -72,7 +70,7 @@ public class FileConverter extends JFrame {
         
         mainPanel.add(topPanel, BorderLayout.NORTH);
 
-        // -- ZENTRUM: Konvertierungsoptionen --
+        //Mitte/Zentrum: Konvertierungsoptionen
         JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel formatLabel = new JLabel("Konvertieren nach:");
         String[] formats = {"DOCX->PDF","PDF->DOCX","PDF->PNG", "PDF->JPG","Image->PDF","PPTX->PDF","PDF->PPTX","Image->TIFF", "TIFF->PNG"};
@@ -81,15 +79,15 @@ public class FileConverter extends JFrame {
         centerPanel.add(formatComboBox);
         mainPanel.add(centerPanel, BorderLayout.CENTER);
 
-        // -- SÜD-Bereich: Konvertierungs-Button --
+        //Süd-Bereich: Konvertierungs Button
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton convertButton = new JButton("Konvertieren und Speichern unter...");
         bottomPanel.add(convertButton);
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 
-        // --- Action Listeners ---
+        // ab hier Action Listener
 
-        // Aktion für den "Datei auswählen"-Button
+        //Datei auswählen-Button-ActionListener
         selectFileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -103,6 +101,8 @@ public class FileConverter extends JFrame {
         });
         
         
+        
+        //ActionListener zum umstellen der Ansicht (dark-,light Mode)
         darkMode.addActionListener(e -> {
         	FlatDarkLaf.setup();
         	FlatLaf.updateUI();
@@ -120,7 +120,7 @@ public class FileConverter extends JFrame {
         	PrefsManager.saveSettings("midnightlaf");
         });
 
-        // Aktion für den "Konvertieren"-Button
+        //Aktion für den Konvertieren-Button
         convertButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -136,11 +136,14 @@ public class FileConverter extends JFrame {
 
                 JFileChooser saveFileChooser = new JFileChooser();
                 saveFileChooser.setDialogTitle("Speicherort auswählen");
+                
                 // Dateinamen vorschlagen
                 saveFileChooser.setSelectedFile(new File(removeFileExtension(selectedFile.getName()) + "." + removePfeil(selectedFormat.toLowerCase())));
 
                 int userSelection = saveFileChooser.showSaveDialog(FileConverter.this);
 
+                
+                //Hier Auswahl der Datei Formate
                 if (userSelection == JFileChooser.APPROVE_OPTION) {
                     File fileToSave = saveFileChooser.getSelectedFile();
                     
@@ -175,14 +178,14 @@ public class FileConverter extends JFrame {
                     	checkIfFileConversion = Image.tiffToImage(selectedFile.getAbsolutePath(), fileToSave.getAbsolutePath());
                     }
                    
-                    
+                    //Bestätigung falls Konvertierung funktioniert hat
                     if(checkIfFileConversion) {
-                    	// Erfolgsmeldung anzeigen
                         JOptionPane.showMessageDialog(FileConverter.this,
                                 "Datei erfolgreich nach " + fileToSave.getAbsolutePath() + " konvertiert!",
                                 "Konvertierung erfolgreich",
                                 JOptionPane.INFORMATION_MESSAGE);
                     }else {
+                    	//sonst hier eine Fehlermeldung für den User ausgeben
                     	JOptionPane.showMessageDialog(FileConverter.this,
                     			"Da ist was schief gegangen. Prüfe ob das Dateiformat der Datei entspricht",
                     			"Konvertierung nicht erfolgreich",JOptionPane.INFORMATION_MESSAGE);
@@ -192,9 +195,9 @@ public class FileConverter extends JFrame {
         });
     }
 
-    /**
-     * Hilfsmethode, um die Dateiendung eines Namens zu entfernen.
-     */
+    
+    //Hilfsmethode um die Dateiendung eines Namens zu entfernen
+    
     private String removeFileExtension(String filename) {
         int lastDot = filename.lastIndexOf('.');
         if (lastDot > 0) {
@@ -203,6 +206,7 @@ public class FileConverter extends JFrame {
         return filename;
     }
     
+    //Hilfsmethode um den Pfeil von der Datei Format Transformation zu entfernen 
     private String removePfeil(String filename) {
         int lastDot = filename.lastIndexOf('>');
         if (lastDot > 0) {
@@ -211,8 +215,9 @@ public class FileConverter extends JFrame {
         return filename;
     }
 
+    
     public void start() {
-        // Swing-Anwendung im Event-Dispatch-Thread starten
+        // Swing-Anwendung starten (im Event-Dispatch-Thread)
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
