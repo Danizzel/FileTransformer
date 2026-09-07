@@ -1,1 +1,9 @@
+# Build-Output
 /target/
+
+# Eclipse-Workspace (enthaelt Caches, Browser-Daten, Nutzer-Settings)
+/.metadata/
+
+# IntelliJ IDEA
+/.idea/
+*.iml
