@@ -10,6 +10,7 @@ import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 
+//Klasse zum Abspeichern der Themes (sowie das letzte Theme beim öffnen der App wieder reinalden)
 public class PrefsManager {
 
 	private static Preferences prefs = Preferences.userNodeForPackage(PrefsManager.class);

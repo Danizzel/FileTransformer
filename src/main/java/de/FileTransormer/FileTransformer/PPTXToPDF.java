@@ -6,6 +6,7 @@ import com.spire.presentation.FileFormat;
 import com.spire.presentation.Presentation;
 
 
+//Powerpoint File zu PDF
 public class PPTXToPDF {
 	
 	
@@ -15,20 +16,23 @@ public class PPTXToPDF {
 		Presentation presentation = new Presentation();
 		
 		try {
+			//PPTXT File einlesen
 			presentation.loadFromFile(fileLocation);
 			
+			//als PDF abspeichern
 			presentation.saveToFile(fileOutputLocation, FileFormat.PDF);
 			presentation.dispose();
 			return true;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return false;
 	}
 	
+	//PDF zu PPTX
 	public static boolean pdfToPPTX(String fileLocation, String fileOutputLocation) {
 
+		//PDF mit weißen Seiten und dann PPTX Files als Images auf die Seiten abspeichern
 		try (Document doc = new Document(fileLocation)) {
 			doc.setBackground(java.awt.Color.WHITE);
 			doc.setFitWindow(true);

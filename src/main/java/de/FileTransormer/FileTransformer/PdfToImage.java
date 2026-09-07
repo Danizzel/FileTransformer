@@ -9,11 +9,13 @@ import org.apache.pdfbox.rendering.ImageType;
 import org.apache.pdfbox.rendering.PDFRenderer;
 import org.apache.pdfbox.tools.imageio.ImageIOUtil;
 
+//PDF zu PNG
 public class PdfToImage {
 
 	public static boolean pdfToPNG(String fileLocation, String fileOutputLocation) {
 
 		try {
+			//PDF File einlesen
 			PDDocument doc = PDDocument.load(new File(fileLocation));
 			PDFRenderer pdfRenderer = new PDFRenderer(doc);
 
@@ -22,6 +24,7 @@ public class PdfToImage {
 				outputDir.mkdirs(); // mkdirs() erstellt auch übergeordnete Verzeichnisse, falls nötig
 			}
 
+			//Hier nun durch die PDF pages gehen und jede Seite als Bild im Ordner abspeichern
 			for (int page = 0; page < doc.getNumberOfPages(); page++) {
 				BufferedImage bim = pdfRenderer.renderImageWithDPI(page, 300, ImageType.RGB);
 
@@ -42,6 +45,8 @@ public class PdfToImage {
 
 	}
 
+	
+	//wie oben nur mit JPG Files
 	public static boolean pdfToJPG(String fileLocation, String fileOutputLocation) {
 
 		try {
@@ -50,7 +55,7 @@ public class PdfToImage {
 
 			File outputDir = new File(ToolClass.cutTitel(fileOutputLocation));
 			if (!outputDir.exists()) {
-				outputDir.mkdirs(); // mkdirs() erstellt auch übergeordnete Verzeichnisse, falls nötig
+				outputDir.mkdirs();
 			}
 
 			for (int page = 0; page < doc.getNumberOfPages(); page++) {
@@ -65,7 +70,6 @@ public class PdfToImage {
 			doc.close();
 			return true;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
