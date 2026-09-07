@@ -4,7 +4,7 @@
   <groupId>de.FileTransormer</groupId>
   <artifactId>FileTransformer</artifactId>
   <name>FileTransformer</name>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.1.0-SNAPSHOT</version>
   <url>http://maven.apache.org</url>
   <build>
     <plugins>
@@ -51,6 +51,11 @@
       <id>AsposeJavaAPI</id>
       <name>Aspose Java API</name>
       <url>https://releases.aspose.com/java/repo/</url>
+    </repository>
+    <repository>
+      <id>com.e-iceblue</id>
+      <name>e-iceblue</name>
+      <url>https://repo.e-iceblue.com/nexus/content/groups/public/</url>
     </repository>
   </repositories>
   <dependencies>
