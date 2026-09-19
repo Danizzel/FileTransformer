@@ -38,6 +38,7 @@ public class CompressImage {
             return true;
 
         }catch(Exception ex) {
+            System.err.println(ex.getStackTrace().toString());
             return false;
         }
     }
