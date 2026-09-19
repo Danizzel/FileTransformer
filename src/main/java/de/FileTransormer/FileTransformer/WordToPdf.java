@@ -19,13 +19,18 @@ import fr.opensagres.poi.xwpf.converter.pdf.PdfOptions;
 
 public class WordToPdf {
 	
+	//Word zu PDF
 	public static boolean wordToPdf(String fileLocation, String fileOutputLocation) {
 		
 		try {
+		//Word File einlesen
     		FileInputStream docFile = new FileInputStream(fileLocation);
     		XWPFDocument doc = new XWPFDocument(docFile);
     		PdfOptions pdfOptions = PdfOptions.create();
+    		
+    		//PDF Speicherort einlesen
     		FileOutputStream out = new FileOutputStream(fileOutputLocation);
+    		//Word File zu PDF umwandeln und abspeichern
     		PdfConverter.getInstance().convert(doc, out, pdfOptions);
     		doc.close();
     		out.close();
@@ -38,6 +43,7 @@ public class WordToPdf {
         
 	}
 	
+	//PDF zu Word
 	public static boolean pdfToWord(String fileLocation, String fileOutputLocation) {
 		
 		//TODO: pdf to word kopiert bis jetzt ohne formatierung nur den text

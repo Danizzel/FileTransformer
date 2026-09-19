@@ -1,5 +1,7 @@
 package de.FileTransormer.FileTransformer;
 
+
+//Hilfsklasse
 public class ToolClass {
 
 	public static String cutTitel(String fileLocationName) {

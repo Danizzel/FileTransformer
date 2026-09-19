@@ -13,9 +13,7 @@ import java.util.Comparator;
 
 public class FileConverter extends JFrame {
 
-    /**
-	 * 
-	 */
+    
 	private static final long serialVersionUID = 7652734068881376422L;
 	
 	// Globale Variablen für UI-Steuerung
@@ -27,8 +25,8 @@ public class FileConverter extends JFrame {
     private File[] imageToPdfFiles;
 
     public FileConverter() {
-        // Fenstereinstellungen
-    	
+        
+    	//Fenster-Einstellung
     	PrefsManager.loadAndApplySettings();
     	
         setTitle("Datei-Konverter");
@@ -355,9 +353,9 @@ public class FileConverter extends JFrame {
         PrefsManager.loadAndApplySettings();
     }
 
-    /**
-     * Hilfsmethode, um die Dateiendung eines Namens zu entfernen.
-     */
+    
+    //Hilfsmethode um die Dateiendung eines Namens zu entfernen
+    
     private String removeFileExtension(String filename) {
         int lastDot = filename.lastIndexOf('.');
         if (lastDot > 0) {
@@ -366,6 +364,7 @@ public class FileConverter extends JFrame {
         return filename;
     }
     
+    //Hilfsmethode um den Pfeil von der Datei Format Transformation zu entfernen 
     private String removePfeil(String filename) {
         int lastDot = filename.lastIndexOf('>');
         if (lastDot > 0) {
@@ -374,8 +373,9 @@ public class FileConverter extends JFrame {
         return filename;
     }
 
+    
     public void start() {
-        // Swing-Anwendung im Event-Dispatch-Thread starten
+        // Swing-Anwendung starten (im Event-Dispatch-Thread)
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {

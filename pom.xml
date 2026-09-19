@@ -13,11 +13,6 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <flatlafVersion>3.4</flatlafVersion>
-    <!-- 
-      KORREKTUR 1: Dies ist der moderne Weg, um Maven mitzuteilen, 
-      dass es für Java 8 kompilieren soll. 
-      Dies behebt die "Bootstrap Classpath"-Warnungen.
-    -->
     <maven.compiler.release>8</maven.compiler.release>
   </properties>
   
@@ -36,14 +31,12 @@
 
 	<build>
     <plugins>
-        <!-- Dieser Plugin-Eintrag stellt sicher, dass die Java-Version korrekt verwendet wird -->
+        <!--FIX: Stellt sicher dass die Java-Version korrekt verwendet wird-->
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
             <version>3.13.0</version>
-            <!-- Die Konfiguration wird von der <maven.compiler.release> Eigenschaft übernommen -->
         </plugin>
-
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-shade-plugin</artifactId>
@@ -60,11 +53,6 @@
                                 <mainClass>de.FileTransormer.FileTransformer.App</mainClass>
                             </transformer>
                         </transformers>
-                        
-                        <!-- 
-                          Dieser Filter ist immer noch nützlich, um Probleme mit 
-                          signierten JARs zu verhindern und schadet nicht.
-                        -->
                         <filters>
                             <filter>
                                 <artifact>*:*</artifact>
@@ -85,15 +73,13 @@
     </plugins>
 	</build>
 
-  <dependencies>
-	
+  <dependencies>	
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>3.8.1</version>
       <scope>test</scope>
-    </dependency>
-    
+    </dependency>  
    		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
@@ -129,13 +115,11 @@
         	<artifactId>aspose-pdf</artifactId>
         	<version>24.7</version> 
         </dependency>
-        
         <dependency>
        		<groupId>e-iceblue</groupId>
         	<artifactId>spire.presentation.free</artifactId>
         	<version>3.9.0</version>
     	</dependency>
-    	
     	<dependency>
         	<groupId>com.twelvemonkeys.imageio</groupId>
         	<artifactId>imageio-core</artifactId>
@@ -146,22 +130,11 @@
         	<artifactId>imageio-tiff</artifactId>
         	<version>3.10.1</version>
     	</dependency>
-        
-        <!-- 
-          KORREKTUR 2: Dies ist die *einzige* FlatLaf-Abhängigkeit, die du brauchst.
-          Die nativen Dateien sind hier bereits enthalten.
-        -->
         <dependency>
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf</artifactId>
             <version>${flatlafVersion}</version>
         </dependency>
-        
-        <!-- 
-          ALLE ANDEREN FLATLAF-ABHÄNGIGKEITEN MIT <classifier> UND <type>
-          WURDEN ENTFERNT, DA SIE DEN FEHLER VERURSACHT HABEN.
-        -->
-    
   </dependencies>
 </project>
 
