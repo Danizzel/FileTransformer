@@ -208,7 +208,7 @@ public class FileConverter extends JFrame {
         JPanel imgPanel = new JPanel(new BorderLayout(10, 10));
         imgPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
 
-        JLabel header = new JLabel("Bild (JPG/PNG) -> PDF (Test)");
+        JLabel header = new JLabel("Bilder (JPG/PNG) -> PDF");
         header.setFont(header.getFont().deriveFont(Font.BOLD, 16f));
         imgPanel.add(header, BorderLayout.NORTH);
 
@@ -274,9 +274,9 @@ public class FileConverter extends JFrame {
                             "Da ist was schief gegangen. Prüfe, ob es sich um gültige Bilder handelt.",
                             "Konvertierung nicht erfolgreich", JOptionPane.ERROR_MESSAGE);
                 }
+
             }
         });
-
         return imgPanel;
     }
 
